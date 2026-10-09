@@ -1,13 +1,15 @@
 # asv_wave_sim in asv_ws - origin and local changes
 
 This directory is a **workspace package derived from gz-waves**, not a pristine
-third-party checkout. It is tracked in the asv_ws repository like any package
-we maintain.
+third-party checkout. It is its own git repository (started fresh from the
+imported files, not upstream's history) and a **git submodule** of the asv_ws
+`src` repository, which records which commit of it the workspace uses.
 
 | | |
 |---|---|
 | Upstream | [srmainwaring/asv_wave_sim](https://github.com/srmainwaring/asv_wave_sim) (Rhys Mainwaring) |
 | Imported from | a clone of upstream at `~/Downloads/asv_wave_sim`, which keeps the full upstream history |
+| This repository | first commit `901c654` = upstream `ca8629d` + the local changes below |
 | Upstream commit | `ca8629d` - "Prevent duplicate textures being loaded in displacement map" |
 | Imported | 2026-10-09 |
 | Licence | GPL-3.0 (upstream's; see `LICENSE`, `LICENSE_THIRDPARTY`). It depends on CGAL and FFTW, both GPL |
@@ -41,6 +43,8 @@ git apply --3way /path/to/asv_ws/src/asv_gz_waves/patches/gz-waves-asv_ws.patch
 # resolve any conflicts, then replace this directory's contents with the
 # result (keeping this file), rebuild, and refresh the patch:
 #   git diff <new commit> > asv_gz_waves/patches/gz-waves-asv_ws.patch
+# then commit here, and in the parent repository commit the moved
+# submodule pointer:  git add asv_wave_sim && git commit
 ```
 
 After an update, re-run the checks in `docs/07` §3: the slowdown test
